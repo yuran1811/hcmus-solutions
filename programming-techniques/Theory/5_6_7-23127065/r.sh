@@ -1,1 +1,0 @@
-./bin/main ./assets/$1.bmp $2 $3

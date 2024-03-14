@@ -1,1 +1,0 @@
-https://vincmazet.github.io/bip/index.html

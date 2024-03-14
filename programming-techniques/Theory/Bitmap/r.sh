@@ -1,0 +1,1 @@
+./bin/main ./assets/$1.bmp -h $2 -w $3
