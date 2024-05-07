@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
   app.invertColor(f, true);
 
   app.scale(f, 2, true);
-  app.downResolution(f, 8, true);
+  app.downResolution(f, 20, true);
 
   app.flipHorizontal(f, true);
   app.flipVertical(f, true);
