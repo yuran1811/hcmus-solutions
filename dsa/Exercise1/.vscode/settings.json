@@ -1,0 +1,22 @@
+{
+	"editor.defaultFormatter": "James-Yu.latex-workshop",
+	"editor.formatOnSave": true,
+	"editor.formatOnSaveMode": "modificationsIfAvailable",
+	"files.exclude": {
+		"**/*.aux": true,
+		"**/*.bbl": true,
+		"**/*.blg": true,
+		"**/*.fdb_latexmk": true,
+		"**/*.fls": true,
+		"**/*.gz": true,
+		"**/*.log": true,
+		"**/*.lol": true,
+		"**/*.out": true,
+		"**/*.pyg": true,
+		"**/*.synctex.gz": true,
+		"**/*.synctex": true,
+		"**/*.synctex(busy)": true,
+		"**/*.toc": true,
+		"**/_minted*": true
+	}
+}

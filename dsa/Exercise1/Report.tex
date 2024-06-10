@@ -1,0 +1,79 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst,setspace,subcaption}
+\usepackage{amsmath,amssymb,graphicx,xcolor,url}
+\usepackage{fancyhdr,tocbasic,titlesec,minted,listings}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage[skip=10pt plus1pt, indent=20pt]{parskip}
+\usepackage[colorlinks=true,allcolors=blue,urlcolor=magenta]{hyperref}
+
+\renewcommand{\thesection}{\arabic{section}}
+
+% Header and footer styling
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+\fancyhf{}
+\fancyhead[R]{\nouppercase\rightmark\hfill~Lab report}
+\fancyfoot[C]{\hfill\thepage\hfill}
+
+% TOC styling
+\DeclareTOCStyleEntry[
+  indent=12pt,
+  level=1
+]{largetocline}{section}
+
+% Title page data
+\title{Implementing Stack and Queue from scratch}
+\author{Ngo Nguyen The Khoa -- 23127065 -- 23CLC09}
+\date{June 3, 2024} % {\today}
+
+\begin{document}
+
+% Title page and TOC
+\input{title_page}
+\tableofcontents\thispagestyle{empty}
+
+\pagebreak
+\section{Result Screenshots}
+\input{texs/StackScreenshots.tex}
+\input{texs/QueueScreenshots.tex}
+
+\pagebreak
+\section{Recursive versions}
+\input{texs/RecursiveStack.tex}
+\input{texs/RecursiveQueue.tex}
+
+\pagebreak
+\section{Self-evaluation}
+\begin{center}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{|l|p{\dimexpr0.6\linewidth-2\tabcolsep}|c|}
+    \hline
+    \textbf{No.} & \textbf{Details}            & \textbf{Score} \\ \hline
+    1            & Stack (Array version)       & 100\%          \\ \hline
+    2            & Stack (Linked List version) & 100\%          \\ \hline
+    3            & Queue (Array version)       & 100\%          \\ \hline
+    4            & Queue (Linked List version) & 100\%          \\ \hline
+    5            & Recursive versions          & 100\%          \\ \hline
+    6            & Report                      & 100\%          \\ \hline
+  \end{tabular}
+\end{center}
+
+\section{Exercise Feedback}
+\subsection{What I learned}
+\begin{flushleft}
+  Because almost the things could be done easily, I have learned nothing new from this exercise.
+\end{flushleft}
+\subsection{What I found challenging}
+\begin{flushleft}
+  This exercise is quite simple and easy, so I have no difficulties to finish this task.
+\end{flushleft}
+\subsection{What I have used in this exercise}
+\begin{itemize}
+  \item I used C++ to implement the data structures and the test cases.
+  \item I also used \LaTeX{} to write this report.
+  \item All the source code and the report are available in \href{https://github.com/yuran1811/}{my github repo}
+\end{itemize}
+\end{document}
