@@ -6,14 +6,14 @@
 	\item \textbf{Practical Performance:}
 	      \begin{itemize}
 		      \item  Loop-based implementations are generally faster in practice because they avoid the overhead of function calls and recursion.
-		      \item But in the below screenshot, the copy operation with recursive version seems to be faster than the loop version with \(10^{8}\) elements.
-		            \begin{figure}[!ht]
-			            \centering
-			            \includegraphics[width=0.6\textwidth]{imgs/StackArray/metrics.png}
-			            \caption{Recursive and loop version comparison of Stack (Array version)}\label{fig:stack_arr_metrics}
-		            \end{figure}
+		      \item The recursive version doesn't work well with large data sets because of stack overflow.
 	      \end{itemize}
 \end{itemize}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.6\textwidth]{imgs/StackArray/metrics.png}
+	\caption{Recursive and loop version comparison of Stack (Array version)}\label{fig:stack_arr_metrics}
+\end{figure}
 
 \subsubsection*{Recursion Stack (Linked List version)}
 \begin{itemize}
@@ -21,6 +21,7 @@
 	\item \textbf{Practical Performance:}
 	      \begin{itemize}
 		      \item  Loop-based implementations are generally faster in practice because they avoid the overhead of function calls and recursion.
+		      \item The recursive version doesn't work well with large data sets because of stack overflow.
 	      \end{itemize}
 \end{itemize}
 \begin{figure}[!ht]

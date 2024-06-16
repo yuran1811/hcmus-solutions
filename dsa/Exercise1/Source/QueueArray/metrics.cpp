@@ -8,20 +8,25 @@
 using namespace std;
 using namespace std::chrono;
 
-const int n = 1e7;
-const int m = 1e8;
+const int n = 3e7;
+const int m = 4e4;
 
 time_point<system_clock> start, stop;
-duration<double> elapsed_time;
+
+template <typename T>
+void generate_queue(T& q) {
+  for (int i = 0; i < m; i++) q.enqueue(rand() % 100);
+}
 
 template <typename T>
 void measure_enqueue(T& queue, const string& version) {
   start = high_resolution_clock::now();
   for (int i = 0; i < n; i++) queue.enqueue(rand() % 100);
   stop = high_resolution_clock::now();
-  elapsed_time = stop - start;
+
+  auto elapsed_time = duration_cast<milliseconds>(stop - start);
   cout << "\tEnqueue with " << version << " version: " << elapsed_time.count()
-       << "s\n";
+       << " milliseconds\n";
 }
 
 template <typename T>
@@ -29,9 +34,10 @@ void measure_queue_copy(T& src_queue, T& dest_queue, const string& version) {
   start = high_resolution_clock::now();
   dest_queue.copyQueue(src_queue);
   stop = high_resolution_clock::now();
-  elapsed_time = stop - start;
+
+  auto elapsed_time = duration_cast<microseconds>(stop - start);
   cout << "\tCopy queue with " << version
-       << " version: " << elapsed_time.count() << "s\n";
+       << " version: " << elapsed_time.count() << " microseconds\n";
 }
 
 int main() {
@@ -46,6 +52,9 @@ int main() {
 
   src_queue.init(m);
   src_recursive_queue.init(m);
+
+  generate_queue(src_queue);
+  generate_queue(src_recursive_queue);
 
   cout << "Enqueue " << n << " elements\n";
   measure_enqueue<Queue<int>>(queue, "loop");

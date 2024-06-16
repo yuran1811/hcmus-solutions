@@ -8,20 +8,25 @@
 using namespace std;
 using namespace std::chrono;
 
-const int n = 1e4;
-const int m = 1e8 + n;
+const int n = 3e4;
+const int m = 3e4;
 
-time_point<system_clock> start, stop;
-duration<double> elapsed_time;
+high_resolution_clock::time_point start, stop;
+
+template <typename T>
+void generate_stack(T& s) {
+  for (int i = 0; i < m; i++) s.push(rand() % 100);
+}
 
 template <typename T>
 void measure_push(T& s, const string& version) {
   start = high_resolution_clock::now();
   for (int i = 0; i < n; i++) s.push(rand() % 100);
   stop = high_resolution_clock::now();
-  elapsed_time = stop - start;
+
+  auto elapsed_time = duration_cast<microseconds>(stop - start);
   cout << "\tPush with " << version << " version: " << elapsed_time.count()
-       << "s\n";
+       << " microseconds\n";
 }
 
 template <typename T>
@@ -29,9 +34,10 @@ void measure_stack_copy(T& src_stack, T& dest_stack, const string& version) {
   start = high_resolution_clock::now();
   dest_stack.copyStack(src_stack);
   stop = high_resolution_clock::now();
-  elapsed_time = stop - start;
+
+  auto elapsed_time = duration_cast<microseconds>(stop - start);
   cout << "\tCopy stack with " << version
-       << " version: " << elapsed_time.count() << "s\n";
+       << " version: " << elapsed_time.count() << " microseconds\n";
 }
 
 template <typename T>
@@ -39,9 +45,10 @@ void measure_release(T& s, const string& version) {
   start = high_resolution_clock::now();
   s.release();
   stop = high_resolution_clock::now();
-  elapsed_time = stop - start;
+
+  auto elapsed_time = duration_cast<microseconds>(stop - start);
   cout << "\tRelease with " << version << " version: " << elapsed_time.count()
-       << "s\n";
+       << " microseconds\n";
 }
 
 int main() {
@@ -56,6 +63,9 @@ int main() {
 
   src_stack.init();
   src_recursive_stack.init();
+
+  generate_stack(src_stack);
+  generate_stack(src_recursive_stack);
 
   cout << "Push " << n << " elements\n";
   measure_push<Stack<int>>(stack, "loop");

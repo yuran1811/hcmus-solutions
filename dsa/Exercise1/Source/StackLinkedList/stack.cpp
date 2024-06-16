@@ -11,7 +11,14 @@ void Stack<T>::copyStack(const Stack<T>& s) {
   release();
 
   top = nullptr;
-  for (Node* p = s.top; p; p = p->next) push(p->data);
+  for (Node *p = s.top, *cur = nullptr; p; p = p->next) {
+    if (!top)
+      top = new Node{p->data, nullptr}, cur = top;
+    else {
+      cur->next = new Node{p->data, nullptr};
+      cur = cur->next;
+    }
+  }
 }
 
 template <typename T>

@@ -8,19 +8,19 @@
 using namespace std;
 using namespace std::chrono;
 
-const int n = 2e4;
+const int n = 4e4;
 
 time_point<system_clock> start, stop;
-duration<double> elapsed_time;
 
 template <typename T>
 void measure_enqueue(T& queue, const string& version) {
   start = high_resolution_clock::now();
   for (int i = 0; i < n; i++) queue.enqueue(rand() % 100);
   stop = high_resolution_clock::now();
-  elapsed_time = stop - start;
+
+  auto elapsed_time = duration_cast<microseconds>(stop - start);
   cout << "\tEnqueue with " << version << " version: " << elapsed_time.count()
-       << "s\n";
+       << " microseconds\n";
 }
 
 template <typename T>
@@ -28,9 +28,10 @@ void measure_release(T& q, const string& version) {
   start = high_resolution_clock::now();
   q.release();
   stop = high_resolution_clock::now();
-  elapsed_time = stop - start;
+
+  auto elapsed_time = duration_cast<microseconds>(stop - start);
   cout << "\tRelease with " << version << " version: " << elapsed_time.count()
-       << "s\n";
+       << " microseconds\n";
 }
 
 int main() {
