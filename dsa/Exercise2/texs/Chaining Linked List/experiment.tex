@@ -1,0 +1,42 @@
+\pagebreak
+\subsection{Chaining Linked List and Linear Searching Algorithm}
+\begin{itemize}
+	\item \textbf{Theoretical Time Complexity:}
+	      \begin{itemize}
+		      \item The time complexity of searching using Chaining Linked List is \(O(n)\).
+		      \item The time complexity of searching using Linear Searching Algorithm is \(O(n)\).
+	      \end{itemize}
+	\item \textbf{Actual execution time:}
+	      \begin{itemize}
+		      \item Searching using Chaining Linked List is faster than using Linear Searching Algorithm in most cases (except there are too many collisions).
+	      \end{itemize}
+	\item \textbf{Case Screenshots:}
+	      \begin{figure}[!ht]
+		      \centering
+		      \begin{subfigure}{0.45\textwidth}
+			      \centering
+			      \includegraphics[width=\textwidth]{imgs/Chaining Linked List/beg.png}
+			      \caption{When the key is at the begining of Hash Table}\label{fig:chainingll-beg-metric}
+		      \end{subfigure}
+		      \hfill
+		      \begin{subfigure}{0.45\textwidth}
+			      \centering
+			      \includegraphics[width=\textwidth]{imgs/Chaining Linked List/mid.png}
+			      \caption{When the key is at the middle of Hash Table}\label{fig:chainingll-mid-metric}
+		      \end{subfigure}
+		      \hfill
+		      \begin{subfigure}{0.45\textwidth}
+			      \centering
+			      \includegraphics[width=\textwidth]{imgs/Chaining Linked List/end.png}
+			      \caption{When the key is at the end of Hash Table}\label{fig:chainingll-end-metric}
+		      \end{subfigure}
+		      \hfill
+		      \begin{subfigure}{0.45\textwidth}
+			      \centering
+			      \includegraphics[width=\textwidth]{imgs/Chaining Linked List/not-found.png}
+			      \caption{When the key is `not'~in Hash Table}\label{fig:chainingll-notfound-metric}
+		      \end{subfigure}
+
+		      \caption{Screenshots of Searching Case with Chaining Linked List.}\label{fig:chainingll-search-metric}
+	      \end{figure}
+\end{itemize}

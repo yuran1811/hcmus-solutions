@@ -1,0 +1,42 @@
+\pagebreak
+\subsection{Double Hashing and Linear Searching Algorithm}
+\begin{itemize}
+	\item \textbf{Theoretical Time Complexity:}
+	      \begin{itemize}
+		      \item The time complexity of searching using Double Hashing is \(O(n)\).
+		      \item The time complexity of searching using Linear Searching Algorithm is \(O(n)\).
+	      \end{itemize}
+	\item \textbf{Actual execution time:}
+	      \begin{itemize}
+		      \item Searching using Double Hashing is faster than using Linear Searching Algorithm in most cases (except there are too many collisions).
+	      \end{itemize}
+	\item \textbf{Case Screenshots:}
+	      \begin{figure}[!ht]
+		      \centering
+		      \begin{subfigure}{0.45\textwidth}
+			      \centering
+			      \includegraphics[width=\textwidth]{imgs/Double Hashing/beg.png}
+			      \caption{When the key is at the begining of Hash Table}\label{fig:dblhashing-beg-metric}
+		      \end{subfigure}
+		      \hfill
+		      \begin{subfigure}{0.45\textwidth}
+			      \centering
+			      \includegraphics[width=\textwidth]{imgs/Double Hashing/mid.png}
+			      \caption{When the key is at the middle of Hash Table}\label{fig:dblhashing-mid-metric}
+		      \end{subfigure}
+		      \hfill
+		      \begin{subfigure}{0.45\textwidth}
+			      \centering
+			      \includegraphics[width=\textwidth]{imgs/Double Hashing/end.png}
+			      \caption{When the key is at the end of Hash Table}\label{fig:dblhashing-end-metric}
+		      \end{subfigure}
+		      \hfill
+		      \begin{subfigure}{0.45\textwidth}
+			      \centering
+			      \includegraphics[width=\textwidth]{imgs/Double Hashing/not-found.png}
+			      \caption{When the key is `not'~in Hash Table}\label{fig:dblhashing-notfound-metric}
+		      \end{subfigure}
+
+		      \caption{Screenshots of Searching Case with Double Hashing.}\label{fig:dblhashing-search-metric}
+	      \end{figure}
+\end{itemize}

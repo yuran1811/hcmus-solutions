@@ -1,0 +1,42 @@
+\pagebreak
+\subsection{Chaining AVL and Linear Searching Algorithm}
+\begin{itemize}
+	\item \textbf{Theoretical Time Complexity:}
+	      \begin{itemize}
+		      \item The time complexity of searching using Chaining AVL is \(O(\log(n))\).
+		      \item The time complexity of searching using Linear Searching Algorithm is \(O(n)\).
+	      \end{itemize}
+	\item \textbf{Actual execution time:}
+	      \begin{itemize}
+		      \item Searching using Chaining AVL is almost faster than using Linear Searching Algorithm.
+	      \end{itemize}
+	\item \textbf{Case Screenshots:}
+	      \begin{figure}[!ht]
+		      \centering
+		      \begin{subfigure}{0.45\textwidth}
+			      \centering
+			      \includegraphics[width=\textwidth]{imgs/Chaining AVL/beg.png}
+			      \caption{When the key is at the begining of Hash Table}\label{fig:chainingavl-beg-metric}
+		      \end{subfigure}
+		      \hfill
+		      \begin{subfigure}{0.45\textwidth}
+			      \centering
+			      \includegraphics[width=\textwidth]{imgs/Chaining AVL/mid.png}
+			      \caption{When the key is at the middle of Hash Table}\label{fig:chainingavl-mid-metric}
+		      \end{subfigure}
+		      \hfill
+		      \begin{subfigure}{0.45\textwidth}
+			      \centering
+			      \includegraphics[width=\textwidth]{imgs/Chaining AVL/end.png}
+			      \caption{When the key is at the end of Hash Table}\label{fig:chainingavl-end-metric}
+		      \end{subfigure}
+		      \hfill
+		      \begin{subfigure}{0.45\textwidth}
+			      \centering
+			      \includegraphics[width=\textwidth]{imgs/Chaining AVL/not-found.png}
+			      \caption{When the key is `not'~in Hash Table}\label{fig:chainingavl-notfound-metric}
+		      \end{subfigure}
+
+		      \caption{Screenshots of Searching Case with Chaining AVL.}\label{fig:chainingavl-search-metric}
+	      \end{figure}
+\end{itemize}

@@ -1,0 +1,95 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst,setspace,subcaption}
+\usepackage{amsmath,amssymb,graphicx,xcolor,url}
+\usepackage{fancyhdr,tocbasic,titlesec,listings}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage[skip=10pt plus1pt, indent=20pt]{parskip}
+\usepackage[colorlinks=true,allcolors=blue,urlcolor=magenta]{hyperref}
+
+\renewcommand{\thesection}{\arabic{section}}
+
+% Header and footer styling
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+\fancyhf{}
+\fancyhead[R]{\nouppercase\rightmark\hfill~Lab report}
+\fancyfoot[C]{\hfill\thepage\hfill}
+
+% TOC styling
+\DeclareTOCStyleEntry[
+  indent=12pt,
+  level=1
+]{largetocline}{section}
+
+% Title page data
+\title{Implementing Hash Table from scratch}
+\author{Ngo Nguyen The Khoa -- 23127065 -- 23CLC09}
+\date{August 6, 2024}
+
+\begin{document}
+
+% Title page and TOC
+\input{title_page}
+\tableofcontents\thispagestyle{empty}
+
+\pagebreak
+\input{texs/HowIImplemented.tex}
+
+\pagebreak
+\section{Result Screenshots}
+\input{texs/Linear Probing/result.tex}
+\input{texs/Quadratic Probing/result.tex}
+\input{texs/Chaining AVL/result.tex}
+\input{texs/Chaining Linked List/result.tex}
+\input{texs/Double Hashing/result.tex}
+
+\pagebreak
+\section{Experiments}
+\input{texs/Linear Probing/experiment.tex}
+\input{texs/Quadratic Probing/experiment.tex}
+\input{texs/Chaining AVL/experiment.tex}
+\input{texs/Chaining Linked List/experiment.tex}
+\input{texs/Double Hashing/experiment.tex}
+
+\pagebreak
+\section{Self-evaluation}
+\begin{center}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{|l|p{\dimexpr0.6\linewidth-2\tabcolsep}|c|}
+    \hline
+    \textbf{No.} & \textbf{Details}           & \textbf{Score} \\ \hline
+    1            & Linear Probing             & 100\%          \\ \hline
+    2            & Quadratic Probing          & 100\%          \\ \hline
+    3            & Chaining using Linked List & 100\%          \\ \hline
+    4            & Chaining using AVL Tree    & 100\%          \\ \hline
+    5            & Double Hashing             & 100\%          \\ \hline
+    6            & Experiments                & 100\%          \\ \hline
+    7            & Report                     & 100\%          \\ \hline
+  \end{tabular}
+\end{center}
+
+\pagebreak
+\section{Exercise Feedback}
+\subsection{What I have learned from this Exercise}
+\begin{flushleft}
+  Because almost the things could be done easily, I have learned a few things new from this exercise.
+  \begin{itemize}
+    \item I have learned how to implement the hash table using different methods of collision handling.
+    \item I have learned how to use rehashing to solve the collisions.
+    \item I also know how to test the hash table using different test cases.
+    \item Have a strong understanding of the hash table and its methods is the big thing I got after finishing this Exercise.
+  \end{itemize}
+\end{flushleft}
+\subsection{What I found challenging}
+\begin{flushleft}
+  This exercise is quite simple and easy, so I have no difficulties to finish this task.
+\end{flushleft}
+\subsection{What I have used in this exercise}
+\begin{itemize}
+  \item I used C++ to implement the data structures and the test cases.
+  \item I also used \LaTeX{} to write this report.
+\end{itemize}
+\end{document}
