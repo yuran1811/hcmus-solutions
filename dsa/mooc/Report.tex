@@ -1,0 +1,85 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst,setspace,subcaption}
+\usepackage{amsmath,amssymb,graphicx,xcolor,url}
+\usepackage{fancyhdr,tocbasic,titlesec,listings}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage[skip=10pt plus1pt, indent=20pt]{parskip}
+\usepackage[colorlinks=true,allcolors=blue,urlcolor=magenta]{hyperref}
+
+\renewcommand{\thesection}{\arabic{section}}
+
+% Header and footer styling
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+\fancyhf{}
+\fancyhead[R]{\nouppercase\rightmark\hfill~MOOCs report}
+\fancyfoot[C]{\hfill\thepage\hfill}
+
+% TOC styling
+\DeclareTOCStyleEntry[
+  indent=12pt,
+  level=1
+]{largetocline}{section}
+
+% Title page data
+\title{Massive Open Online Courses (MOOCs)\\Report}
+\author{Ngo Nguyen The Khoa -- 23127065 -- 23CLC09}
+\date{May 20, 2024}
+
+\begin{document}
+
+% Title page and TOC
+\input{texes/title_page.tex}
+\tableofcontents\thispagestyle{empty}
+
+% Main content
+\pagebreak
+\section{Student's information}
+\begin{itemize}
+  \item \textbf{Name:} Ngo Nguyen The Khoa
+  \item \textbf{Student ID:} 23127065
+  \item \textbf{Class:} 23CLC09
+  \item \textbf{Email:} \href{mailto:nntkhoa23@clc.fitus.edu.vn}{nntkhoa23@clc.fitus.edu.vn}
+\end{itemize}
+
+\pagebreak
+\section{Courses' information}
+\input{texes/CourseInfo.tex}
+
+\pagebreak
+\subsection[Foundations of User Experience (UX) Design]{Course 1 -- Foundations of User Experience (UX) Design}
+\input{texes/Course1.tex}
+
+\pagebreak
+\subsection[Start the UX Design Process: Empathize, Define, and Ideate]{Course 2 -- Start the UX Design Process: Empathize, Define, and Ideate}
+\input{texes/Course2.tex}
+
+\pagebreak
+\subsection[Build Wireframes and Low-Fidelity Prototypes]{Course 3 -- Build Wireframes and Low-Fidelity Prototypes}
+\input{texes/Course3.tex}
+
+\pagebreak
+\subsection[Conduct UX Research and Test Early Concepts]{Course 4 -- Conduct UX Research and Test Early Concepts}
+\input{texes/Course4.tex}
+
+\pagebreak
+\subsection[Create High-Fidelity Designs and Prototypes in Figma]{Course 5 -- Create High-Fidelity Designs and Prototypes in Figma}
+\input{texes/Course5.tex}
+
+\pagebreak
+\subsection[Build Dynamic User Interfaces (UI) for Websites]{Course 6 -- Build Dynamic User Interfaces (UI) for Websites}
+\input{texes/Course6.tex}
+
+\pagebreak
+\subsection[Design a User Experience for Social Good \& Prepare for Jobs]{Course 7 -- Design a User Experience for Social Good \& Prepare for Jobs}
+\input{texes/Course7.tex}
+
+% Bibliography
+% \pagebreak
+% \bibliography{bilbs/refs}
+% \bibliographystyle{ieeetr}
+
+\end{document}
