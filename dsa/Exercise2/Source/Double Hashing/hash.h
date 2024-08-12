@@ -14,7 +14,6 @@ struct HashTable {
   };
 
   int capacity;
-  vector<int> collisionCount;
   vector<HashNode*> table;
 
   void init(unsigned int hashSize);
@@ -29,6 +28,8 @@ struct HashTable {
   void add(K key, V value);
   V* searchValue(K key);
   void removeKey(K key);
+
+  void rehashing();
 };
 
 #include "hash.cpp"

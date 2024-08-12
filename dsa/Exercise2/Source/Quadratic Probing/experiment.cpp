@@ -61,22 +61,18 @@ int main() {
     table.add(book.title, book.author);
   }
 
-  cout << "Number of hash ele: " << table.table.size() << "\n";
-  cout << "Number of collisions: " << collisionCounts << "\n\n";
-
   // const int idx = -1;
-  // const int idx = 0;
+  const int idx = 0;
   // const int idx = books.size() >> 1;
-  const int idx = books.size() - 1;
-  Book bookToFind = Book{"Skellig", ""};
+  // const int idx = books.size() - 1;
   // Book bookToFind = Book{"Tim ve binh yen", "Ngo Nguyen The Khoa"};
-  // Book bookToFind = books[idx];
+  Book bookToFind = books[idx];
   cout << "Searching for book: " << idx << "th\n\n";
 
   function<void()> searchKey = [&]() -> void {
     cout << ">>> Using Linear Search: ";
     for (Book book : books)
-      if (book.title == bookToFind.title) return void(cout << "Found " << book.author << "\n");
+      if (book.title == bookToFind.title) return void(cout << "Found\n");
 
     cout << "Not found\n";
   };
@@ -86,7 +82,7 @@ int main() {
 
     string* v = table.searchValue(bookToFind.title);
     if (v)
-      cout << "Found " << *v << "\n";
+      cout << "Found\n";
     else
       cout << "Not found\n";
   };

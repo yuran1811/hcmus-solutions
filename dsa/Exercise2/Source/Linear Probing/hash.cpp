@@ -28,8 +28,8 @@ unsigned int HashTable<K, V>::hashFunction(string key) {
   int pow = p;
 
   for (const char& c : key) {
-    hash = (hash + c * pow) % m;
-    pow = (pow * p) % m;
+    hash = (hash + (1LL * c * pow) % m) % m;
+    pow = (1LL * pow * p) % m;
   }
 
   return hash % capacity;
@@ -37,52 +37,73 @@ unsigned int HashTable<K, V>::hashFunction(string key) {
 
 template <class K, class V>
 void HashTable<K, V>::add(K key, V value) {
-  unsigned int index = hashFunction(key);
+  unsigned int hashKey = hashFunction(key);
+  unsigned int index = hashKey;
 
-  for (int loopCount = 0;
-       loopCount < capacity && table[index] && table[index]->key != key;
-       loopCount++) {
-    index = (index + 1) % capacity;
-
-    if (loopCount == capacity - 1) {
-      cout << ">>> Cannot add \"" << key << ":" << value
-           << "\"\n";
+  for (int loopCount = 0; table[index]; loopCount++) {
+    if (table[index]->key == key) {
+      table[index]->value = value;
       return;
     }
+
+    if (loopCount == capacity) {
+      rehashing();
+      add(key, value);
+      return;
+    }
+
+    index = (hashKey + loopCount) % capacity;
   }
 
-  if (table[index]) {
-    table[index]->value = value;
-  } else {
-    table[index] = new HashNode(key, value);
-  }
+  table[index] = new HashNode(key, value);
 }
 
 template <class K, class V>
 V* HashTable<K, V>::searchValue(K key) {
-  unsigned int index = hashFunction(key);
+  unsigned int hashKey = hashFunction(key);
+  unsigned int index = hashKey;
 
-  for (int loopCount = 0;
-       loopCount < capacity && table[index] && table[index]->key != key;
-       loopCount++) {
-    index = (index + 1) % capacity;
+  for (int loopCount = 0; table[index]; loopCount++) {
+    if (table[index]->key == key) return &table[index]->value;
+
+    if (loopCount == capacity) return nullptr;
+
+    index = (hashKey + loopCount) % capacity;
   }
 
-  return table[index] ? &table[index]->value : nullptr;
+  return nullptr;
 }
 
 template <class K, class V>
 void HashTable<K, V>::removeKey(K key) {
-  unsigned int index = hashFunction(key);
+  unsigned int hashKey = hashFunction(key);
+  unsigned int index = hashKey;
 
-  for (int loopCount = 0;
-       loopCount < capacity && table[index] && table[index]->key != key;
-       loopCount++) {
-    index = (index + 1) % capacity;
+  for (int loopCount = 0; table[index]; loopCount++) {
+    if (table[index]->key == key) break;
+
+    if (loopCount == capacity) break;
+
+    index = (hashKey + loopCount) % capacity;
   }
 
   if (table[index]) {
     delete table[index];
     table[index] = nullptr;
+  }
+}
+
+template <class K, class V>
+inline void HashTable<K, V>::rehashing() {
+  vector<HashNode*> _t = table;
+
+  capacity <<= 1;
+  table.assign(capacity, nullptr);
+
+  for (HashNode* node : _t) {
+    if (node) {
+      add(node->key, node->value);
+      delete node;
+    }
   }
 }

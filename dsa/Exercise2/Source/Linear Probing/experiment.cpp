@@ -61,12 +61,12 @@ int main() {
     table.add(book.title, book.author);
   }
 
-  const int idx = -1;
+  // const int idx = -1;
   // const int idx = 0;
   // const int idx = books.size() >> 1;
-  // const int idx = books.size() - 1;
-  Book bookToFind = Book{"Tim ve binh yen", "Ngo Nguyen The Khoa"};
-  // Book bookToFind = books[idx];
+  const int idx = books.size() - 1;
+  // Book bookToFind = Book{"Tim ve binh yen", "Ngo Nguyen The Khoa"};
+  Book bookToFind = books[idx];
   cout << "Searching for book: " << idx << "th\n\n";
 
   function<void()> searchKey = [&]() -> void {

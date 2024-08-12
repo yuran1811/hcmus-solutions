@@ -25,6 +25,8 @@ struct HashTable {
   void add(K key, V value);
   V* searchValue(K key);
   void removeKey(K key);
+
+  void rehashing();
 };
 
 #include "hash.cpp"

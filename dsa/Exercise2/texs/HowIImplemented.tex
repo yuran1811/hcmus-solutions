@@ -3,12 +3,6 @@
   I implemented the requirements as follows:
   \begin{itemize}
     \item The second hash function I have used for \textsl{`Double Hashing'} is\\~\(h_2(k) = 1 + (k \mod (m - 1))\), where \(m\) is the size of the hash table.
-    \item With \textsl{`Double Hashing'} and \textsl{`Quadratic Probing'} methods, I have maintained a hash table which its size is a prime number larger than the real size to avoid collisions as much as possible.
-    \item I didn't implement rehashing for \textsl{`Double Hashing'} and \textsl{`Quadratic Probing'} because the size of the hash table is fixed, so it could cause `not-found' situation in some cases. (You can find those in the \textsl{`Double Hashing'} and \textsl{`Quadratic Probing'} experiment sections in this report.)
-    \item Although there was no rehashing implementation in my source, I tested using rehashing for \textsl{`Double Hashing'} and \textsl{`Quadratic Probing'} methods to solve the collisions.
-          \begin{itemize}
-            \item \textbf{Rehashing using \textit{`double the size'}:} I have to rehash 8 times, which means the size is a prime number larger than \(3e5\cdot256\) to avoid missing some records.
-            \item \textbf{Rehashing using \textit{`prime number sizing'}:} I have to resize the hash table to \(58500011\approx 3e5\cdot195\) to avoid missing some records.
-          \end{itemize}
+    \item With `Open Addressing' methods, I have implemented a \verb|rehashing| function to solve the `full slots' collisions. And the \verb|rehashing| function I have implemented is `Double The Size'.
   \end{itemize}
 \end{flushleft}
