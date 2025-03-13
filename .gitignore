@@ -1,5 +1,7 @@
 **/bin/*
 **/dist/*
+**/release/*
+**/out/*
 **/*.synctex.gz
 **/_minted-*
 **/*.log
