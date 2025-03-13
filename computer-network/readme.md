@@ -1,6 +1,6 @@
 # Computer Network
 
-- This is a collection of `Computer Network Project` during HCMUS course.
+- This is a collection of my projects in `Computer Network` course.
 
 ## Socket Project
 

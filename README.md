@@ -34,5 +34,5 @@
 
 #### semester-5
 
-- [**[CSC10007] - Operating System**](os/)
+- [**[CSC10007] - Operating System**](operating-system/)
 - [**[CSC14003] - AI Foundations**](ai-foundations/)
