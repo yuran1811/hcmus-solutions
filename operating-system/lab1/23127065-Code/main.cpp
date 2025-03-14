@@ -13,10 +13,7 @@ int main(int argc, char *argv[]) {
   if (!parse_input(finp, algo, time_quantum, procs)) return 1;
 
   simulate(algo, time_quantum, procs);
-
-  vector<int> turn_around, waiting;
-  compute_times(procs, turn_around, waiting);
-  export_result(fout, cpu_timeline, turn_around, waiting);
+  export_result(fout, procs);
 
   for (Process *p : procs) delete p;
 

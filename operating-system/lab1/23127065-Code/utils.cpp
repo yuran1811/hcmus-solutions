@@ -93,8 +93,7 @@ bool parse_input(const string &filename, AlgoType &algo, int &time_quantum,
   return fin.close(), true;
 }
 
-void export_result(const string &filename, const string &cpu_timeline,
-                   const vector<int> &turn_around, const vector<int> &waiting) {
+void export_result(const string &filename, vector<Process *> &procs) {
   ofstream fout(filename);
   if (!fout.is_open())
     return void(std::cerr << "Error: cannot open output file.\n");
@@ -107,10 +106,12 @@ void export_result(const string &filename, const string &cpu_timeline,
   if (res_timeline2.find_first_not_of("_ ") != string::npos)
     fout << res_timeline2 << "\n";
 
-  for (const int &t : turn_around) fout << t << " ";
-  fout << "\n";
-  for (const int &w : waiting) fout << w << " ";
-  fout << "\n";
+  string wt = "\n";
+  for (Process *p : procs) {
+    fout << p->finish_time - p->arrival << " ";
+    wt += std::to_string(p->waiting) + " ";
+  }
+  fout << wt << "\n";
 
   fout.close();
 }

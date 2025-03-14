@@ -73,23 +73,25 @@ bool parse_input(const string &filename, AlgoType &algo, int &time_quantum,
                  vector<Process *> &procs);
 
 /**
- * @brief Exports scheduling simulation results to a file
+ * @brief Exports the processing results to a specified file.
  *
- * This function writes the CPU timeline, resource usage timelines (if used),
- * turn-around times and waiting times to the specified output file.
+ * This function writes the simulation results to a file, including:
+ * - The CPU timeline showing process execution
+ * - Resource timelines (if resources were used)
+ * - Turnaround time for each process (finish_time - arrival)
+ * - Waiting time for each process
  *
  * @param filename Path to the output file
- * @param cpu_timeline String representation of CPU execution timeline
- * @param turn_around Vector of turn-around times for each process
- * @param waiting Vector of waiting times for each process
+ * @param procs Vector of process pointers containing execution data
  *
- * @note The function uses global variables res_timeline1 and res_timeline2 for
- * resource timelines
- * @note Resource timelines will only be written if they contain characters
- * other than '_' and space
+ * @note The function uses global variables cpu_timeline, res_timeline1, and
+ * res_timeline2
+ * @note Resource timelines are only written if they contain characters other
+ * than underscores or spaces
+ * @note If the file cannot be opened, an error message is printed to standard
+ * error
  */
-void export_result(const string &filename, const string &cpu_timeline,
-                   const vector<int> &turn_around, const vector<int> &waiting);
+void export_result(const string &filename, vector<Process *> &procs);
 
 /**
  * @brief Comparator function for First-Come-First-Served (FCFS) process
