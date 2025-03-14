@@ -4,9 +4,10 @@
 
 #include "utils.hpp"
 
-#define scheduler_q(_) priority_queue<Process *, vector<Process *>, _>
-
 typedef bool (*ProcessComparator)(Process *, Process *);
+
+#define scheduler_q \
+  priority_queue<Process *, vector<Process *>, ProcessComparator>
 
 using std::function;
 

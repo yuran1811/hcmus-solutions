@@ -1,7 +1,7 @@
 #include "algo.hpp"
 
-void schedule_proc(Process *&proc, scheduler_q(ProcessComparator) & readyq,
-                   bool waiting = false, const int time = 0) {
+void schedule_proc(Process *&proc, scheduler_q &readyq, bool waiting = false,
+                   const int time = 0) {
   if (readyq.empty()) return;
 
   proc = readyq.top();
@@ -10,8 +10,8 @@ void schedule_proc(Process *&proc, scheduler_q(ProcessComparator) & readyq,
   proc->waiting += waiting ? time - proc->last_ready : 0;
 }
 
-void res_handler(Process *&rproc, scheduler_q(ProcessComparator) & readyq,
-                 string &rtimeline, const int time) {
+void res_handler(Process *&rproc, scheduler_q &readyq, scheduler_q &res1q,
+                 scheduler_q &res2q, string &rtimeline, const int time) {
   string timeline_seg = "_ ";
   if (rproc) {
     timeline_seg[0] = '1' + rproc->id;
@@ -20,11 +20,20 @@ void res_handler(Process *&rproc, scheduler_q(ProcessComparator) & readyq,
       // Resource burst finished for process rproc.
       Segment *next_seg = rproc->next_seg();
       if (next_seg) {
-        // Next segment should be a CPU burst.
         rproc->remain = next_seg->time;
-        rproc->last_ready = time + 1;
         rproc->from_io = true;
-        readyq.push(rproc);
+
+        if (!next_seg->is_cpu) {
+          // Next segment is I/O burst.
+          if (!next_seg->rid)
+            res1q.push(rproc);
+          else
+            res2q.push(rproc);
+        } else {
+          // Next segment is CPU burst.
+          rproc->last_ready = time + 1;
+          readyq.push(rproc);
+        }
       } else
         rproc->finish_time = time + 1;
 
@@ -38,10 +47,9 @@ void simulate(AlgoType algo, const int time_quantum, vector<Process *> &procs) {
   CPUState cpu_state{nullptr, time_quantum};
   Process *r1_proc = nullptr, *r2_proc = nullptr;
 
-  scheduler_q(ProcessComparator)
-      readyq(algo == FCFS || algo == RR ? FCFSComparator
-             : algo == SRTN             ? SRTNComparator
-                                        : SJFComparator),
+  scheduler_q readyq(algo == FCFS || algo == RR ? FCFSComparator
+                     : algo == SRTN             ? SRTNComparator
+                                                : SJFComparator),
       res1q(FCFSComparator), res2q(FCFSComparator);
 
   // Simulation continues until all procs are finished and CPU, res are idle.
@@ -76,6 +84,9 @@ void simulate(AlgoType algo, const int time_quantum, vector<Process *> &procs) {
               res1q.push(cpu_state.proc);
             else
               res2q.push(cpu_state.proc);
+          } else {
+            cpu_state.proc->last_ready = time + 1;
+            readyq.push(cpu_state.proc);
           }
         } else
           cpu_state.proc->finish_time = time + 1;
@@ -110,8 +121,8 @@ void simulate(AlgoType algo, const int time_quantum, vector<Process *> &procs) {
     }
 
     // Resource Processing
-    res_handler(r1_proc, readyq, res_timeline1, time);
-    res_handler(r2_proc, readyq, res_timeline2, time);
+    res_handler(r1_proc, readyq, res1q, res2q, res_timeline1, time);
+    res_handler(r2_proc, readyq, res1q, res2q, res_timeline2, time);
   }
 }
 
