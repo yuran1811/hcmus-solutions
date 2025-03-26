@@ -1,0 +1,71 @@
+{
+  "name": "yupartify",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.6.5",
+  "description": "A robust, powerful for disk management",
+  "author": "yuran1811",
+  "license": "MIT",
+  "engines": {
+    "node": ">=23"
+  },
+  "scripts": {
+    "dev": "nuxt dev",
+    "analyze": "nuxt analyze --no-serve",
+    "clean": "nuxt cleanup",
+    "up": "nuxt upgrade --dedupe",
+    "generate": "nuxt generate",
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "nuxt prepare",
+    "bump": "bumpp",
+    "lint": "eslint ./app ./*.ts",
+    "lint:fix": "eslint ./app ./*.ts --fix",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "tauri:build:debug": "tauri build --debug"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.4.0",
+    "@tauri-apps/plugin-fs": "^2.2.0",
+    "@tauri-apps/plugin-notification": "^2.2.2",
+    "@tauri-apps/plugin-os": "^2.2.1",
+    "@tauri-apps/plugin-shell": "^2.2.0",
+    "@tauri-apps/plugin-store": "^2.2.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.11.0",
+    "@iconify-json/catppuccin": "^1.2.10",
+    "@iconify-json/lucide": "^1.2.32",
+    "@nuxt/content": "^3.4.0",
+    "@nuxt/eslint": "^1.2.0",
+    "@nuxt/test-utils": "^3.17.2",
+    "@nuxt/ui": "^3.0.1",
+    "@pinia/nuxt": "0.10.1",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tauri-apps/cli": "^2.4.0",
+    "@vueuse/nuxt": "^13.0.0",
+    "@vueuse/router": "^13.0.0",
+    "bumpp": "^10.1.0",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "happy-dom": "^17.4.4",
+    "nuxt": "^3.16.1",
+    "nuxt-svgo": "^4.0.16",
+    "pinia": "^3.0.1",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "vitest": "^3.0.9"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3"
+    ],
+    "ignoredBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "vue-demi"
+    ]
+  }
+}

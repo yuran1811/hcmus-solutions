@@ -1,0 +1,365 @@
+@import 'tailwindcss' theme(static);
+@import '@nuxt/ui';
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-heading: 'Montserrat', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+
+  --color-primary: var(--ui-color-primary-500);
+  --color-secondary: var(--ui-color-secondary-500);
+  --color-success: var(--ui-color-success-500);
+  --color-info: var(--ui-color-info-500);
+  --color-warning: var(--ui-color-warning-500);
+  --color-error: var(--ui-color-error-500);
+
+  --breakpoint-ss: 384px;
+  --breakpoint-xs: 512px;
+
+  --gd-to-top: to top in oklab;
+  --gd-to-bottom: to bottom in oklab;
+
+  --gd-bg1: linear-gradient(
+    43deg,
+    oklch(0.792 0.209 151.711) 0%,
+    oklch(0.596 0.145 163.225) 46%,
+    oklch(0.704 0.14 182.503) 100%
+  );
+  --gd-bg2: linear-gradient(
+    43deg,
+    rgb(65, 88, 208) 0%,
+    rgb(200, 80, 192) 46%,
+    rgb(255, 204, 112) 100%
+  );
+}
+
+@layer base {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+@utility flex-center-col {
+  @apply flex-center flex-col;
+}
+@utility scrollbar-hidden {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+@utility fade-shade-* {
+  --tw-gradient-position: --value(--gd-to- *);
+  @apply pointer-events-none from-transparent to-(--ui-bg);
+  background-image: linear-gradient(var(--tw-gradient-stops));
+}
+
+body {
+  @apply !pr-0;
+}
+
+.absolute-center-h {
+  @apply left-1/2 -translate-x-1/2 transform;
+}
+.absolute-center-v {
+  @apply top-1/2 -translate-y-1/2 transform;
+}
+
+.dock {
+  @apply max-xs:hidden fixed bottom-6 left-1/2 z-100 flex h-16 -translate-x-1/2 items-end gap-2 rounded-[22px] p-2 transition-all duration-300 before:absolute before:inset-0 before:opacity-30 before:blur-xl before:duration-300 before:content-[""] hover:brightness-110 hover:before:opacity-80;
+  &,
+  &::before {
+    @apply bg-(image:--gd-bg1);
+  }
+
+  img {
+    @apply w-[48px] min-w-[48px] cursor-pointer rounded-[16px] duration-100;
+  }
+
+  .opened {
+    @apply relative;
+
+    &::after {
+      @apply absolute -bottom-1 left-1/2 size-1 -translate-x-1/2 rounded-full bg-white content-[""];
+    }
+  }
+
+  [data-tooltip] {
+    @apply relative;
+
+    &::before {
+      @apply pointer-events-none invisible absolute top-[-40px] left-1/2 w-max -translate-x-1/2 rounded-xl border-2 border-(--ui-text-muted) bg-(--ui-bg) px-2 py-1 whitespace-nowrap text-(--ui-text-muted) opacity-0 duration-300 content-[attr(data-tooltip)];
+    }
+
+    &:hover::before {
+      @apply visible opacity-100;
+    }
+  }
+}
+
+.card-container {
+  @apply relative h-50 w-50 origin-center transition-all;
+
+  &:active {
+    @apply scale-95;
+  }
+
+  &:hover #card::before {
+    @apply opacity-80 duration-200 content-[""];
+  }
+
+  #card {
+    @apply flex-center absolute inset-0 rounded-[20px] duration-700;
+
+    &,
+    &::before {
+      @apply bg-(image:--gd-bg2);
+    }
+
+    &::before {
+      @apply absolute inset-0 -z-1 opacity-30 blur-xl duration-200 content-[""];
+    }
+  }
+
+  #prompt {
+    @apply absolute bottom-2 left-3 z-1 max-w-28 text-xl font-bold text-(--ui-text) delay-100 duration-300 ease-in-out;
+  }
+
+  .canvas {
+    @apply absolute inset-0 z-3 grid grid-cols-5 grid-rows-5 gap-0 perspective-midrange;
+    grid-template-areas:
+      'tr-1 tr-2 tr-3 tr-4 tr-5'
+      'tr-6 tr-7 tr-8 tr-9 tr-10'
+      'tr-11 tr-12 tr-13 tr-14 tr-15'
+      'tr-16 tr-17 tr-18 tr-19 tr-20'
+      'tr-21 tr-22 tr-23 tr-24 tr-25';
+  }
+
+  .subtitle {
+    @apply absolute top-12 right-0 left-0 translate-y-40 text-center;
+    color: rgb(134, 110, 221);
+  }
+
+  .title {
+    @apply absolute text-2xl font-bold text-(--ui-text) opacity-0 delay-100 duration-300 ease-in-out;
+  }
+}
+
+.partition-item {
+  @apply cursor-pointer rounded border-l-2 border-transparent p-2 transition-colors hover:bg-(--ui-primary)/10;
+
+  &:hover,
+  &.active {
+    @apply border-l-(--ui-primary);
+
+    .partition-item-info {
+      @apply text-(--ui-primary);
+    }
+    .partition-item-type {
+      @apply text-(--ui-text);
+    }
+  }
+}
+
+.page-enter-active,
+.page-leave-active {
+  @apply transition-opacity duration-300 ease-in-out;
+}
+.layout-enter-active,
+.layout-leave-active {
+  @apply transition-opacity duration-500 ease-in-out;
+}
+.page-enter-from,
+.page-leave-to,
+.layout-enter-from,
+.layout-leave-to {
+  @apply opacity-0;
+}
+
+.fade {
+  &-enter-active,
+  &-leave-active {
+    @apply opacity-100 duration-500;
+  }
+
+  &-enter-from,
+  &-leave-to {
+    @apply opacity-0 duration-500;
+  }
+}
+
+.pattern-container {
+  --c: #09f;
+
+  @apply fixed inset-0 bg-black;
+
+  background-image:
+    radial-gradient(4px 100px at 0px 235px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 235px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 117.5px, var(--c) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 252px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 252px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 126px, var(--c) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 150px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 150px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 75px, var(--c) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 253px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 253px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 126.5px, var(--c) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 204px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 204px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 102px, var(--c) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 134px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 134px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 67px, var(--c) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 179px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 179px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 89.5px, var(--c) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 299px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 299px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 149.5px, var(--c) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 215px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 215px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 107.5px, var(--c) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 281px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 281px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 140.5px, var(--c) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 158px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 158px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 79px, var(--c) 100%, #0000 150%),
+    radial-gradient(4px 100px at 0px 210px, var(--c), #0000),
+    radial-gradient(4px 100px at 300px 210px, var(--c), #0000),
+    radial-gradient(1.5px 1.5px at 150px 105px, var(--c) 100%, #0000 150%);
+  background-size:
+    300px 235px,
+    300px 235px,
+    300px 235px,
+    300px 252px,
+    300px 252px,
+    300px 252px,
+    300px 150px,
+    300px 150px,
+    300px 150px,
+    300px 253px,
+    300px 253px,
+    300px 253px,
+    300px 204px,
+    300px 204px,
+    300px 204px,
+    300px 134px,
+    300px 134px,
+    300px 134px,
+    300px 179px,
+    300px 179px,
+    300px 179px,
+    300px 299px,
+    300px 299px,
+    300px 299px,
+    300px 215px,
+    300px 215px,
+    300px 215px,
+    300px 281px,
+    300px 281px,
+    300px 281px,
+    300px 158px,
+    300px 158px,
+    300px 158px,
+    300px 210px,
+    300px 210px,
+    300px 210px;
+  animation: pattern-animation 150s linear infinite;
+
+  &::after {
+    @apply absolute inset-0 z-1 content-[""];
+    backdrop-filter: blur(1em) brightness(6);
+    background-size: 8px 8px;
+    background-image: radial-gradient(
+      circle at 50% 50%,
+      #0000 0,
+      #0000 2px,
+      hsl(0 0 4%) 2px
+    );
+  }
+}
+
+@keyframes pattern-animation {
+  from {
+    background-position:
+      0px 220px,
+      3px 220px,
+      151.5px 337.5px,
+      25px 24px,
+      28px 24px,
+      176.5px 150px,
+      50px 16px,
+      53px 16px,
+      201.5px 91px,
+      75px 224px,
+      78px 224px,
+      226.5px 350.5px,
+      100px 19px,
+      103px 19px,
+      251.5px 121px,
+      125px 120px,
+      128px 120px,
+      276.5px 187px,
+      150px 31px,
+      153px 31px,
+      301.5px 120.5px,
+      175px 235px,
+      178px 235px,
+      326.5px 384.5px,
+      200px 121px,
+      203px 121px,
+      351.5px 228.5px,
+      225px 224px,
+      228px 224px,
+      376.5px 364.5px,
+      250px 26px,
+      253px 26px,
+      401.5px 105px,
+      275px 75px,
+      278px 75px,
+      426.5px 180px;
+  }
+  to {
+    background-position:
+      0px 6800px,
+      3px 6800px,
+      151.5px 6917.5px,
+      25px 13632px,
+      28px 13632px,
+      176.5px 13758px,
+      50px 5416px,
+      53px 5416px,
+      201.5px 5491px,
+      75px 17175px,
+      78px 17175px,
+      226.5px 17301.5px,
+      100px 5119px,
+      103px 5119px,
+      251.5px 5221px,
+      125px 8428px,
+      128px 8428px,
+      276.5px 8495px,
+      150px 9876px,
+      153px 9876px,
+      301.5px 9965.5px,
+      175px 13391px,
+      178px 13391px,
+      326.5px 13540.5px,
+      200px 14741px,
+      203px 14741px,
+      351.5px 14848.5px,
+      225px 18770px,
+      228px 18770px,
+      376.5px 18910.5px,
+      250px 5082px,
+      253px 5082px,
+      401.5px 5161px,
+      275px 6375px,
+      278px 6375px,
+      426.5px 6480px;
+  }
+}

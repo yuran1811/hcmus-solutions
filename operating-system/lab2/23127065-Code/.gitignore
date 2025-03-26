@@ -1,0 +1,13 @@
+.cache
+.cargo
+.data
+.DS_Store
+.env
+.nitro
+.nuxt
+.output
+*.log*
+
+dist
+node_modules
+src-tauri/target

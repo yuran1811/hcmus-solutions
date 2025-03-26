@@ -1,0 +1,43 @@
+[package]
+name = "yupartify"
+version = "0.1.0"
+description = "A robust, powerful for disk management"
+authors = ["yuran1811"]
+license = "MIT"
+repository = "https://github.com/yuran1811/yupartify"
+edition = "2021"
+
+
+[lib]
+name = "yupartify_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+
+[build-dependencies]
+tauri-build = { version = "2.0.5", features = [] }
+
+
+[dependencies]
+tauri = { version = "2.2.5", features = ["tray-icon", "unstable"] }
+tauri-plugin-fs = "2.2.0"
+tauri-plugin-notification = "2.2.1"
+tauri-plugin-opener = "2"
+tauri-plugin-os = "2.2.0"
+tauri-plugin-shell = "2.2.0"
+tauri-plugin-store = "2.2.0"
+chrono = "0.4.31"
+rayon = "1.10"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tempfile = "3.19.0"
+
+
+[profile.dev]
+incremental = true # Compile binary in smaller steps.
+
+[profile.release]
+codegen-units = 1 # Allows LLVM to perform better optimization.
+lto = true        # Enables link-time-optimizations.
+opt-level = "s"   # Prioritizes small binary size. Use `3` if you prefer speed.
+panic = "abort"   # Higher performance by disabling panic handlers.
+strip = true      # Ensures debug symbols are removed.
