@@ -2,6 +2,7 @@
 @import '@nuxt/ui';
 
 @plugin "@tailwindcss/typography";
+@plugin "../tailwindcss/glow.js";
 
 @theme {
   --font-heading: 'Montserrat', sans-serif;
@@ -34,10 +35,6 @@
   );
 }
 
-@layer base {
-  -webkit-tap-highlight-color: transparent;
-}
-
 @utility flex-center {
   @apply flex items-center justify-center;
 }
@@ -55,6 +52,11 @@
   background-image: linear-gradient(var(--tw-gradient-stops));
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+  @apply !select-none;
+}
+
 body {
   @apply !pr-0;
 }
@@ -67,14 +69,14 @@ body {
 }
 
 .dock {
-  @apply max-xs:hidden fixed bottom-6 left-1/2 z-100 flex h-16 -translate-x-1/2 items-end gap-2 rounded-[22px] p-2 transition-all duration-300 before:absolute before:inset-0 before:opacity-30 before:blur-xl before:duration-300 before:content-[""] hover:brightness-110 hover:before:opacity-80;
+  @apply max-xs:hidden fixed bottom-6 left-1/2 z-100 flex h-16 -translate-x-1/2 items-end gap-2 rounded-[22px] p-2 transition before:absolute before:inset-0 before:opacity-30 before:blur-xl before:content-[""] hover:brightness-110 hover:before:opacity-80;
   &,
   &::before {
     @apply bg-(image:--gd-bg1);
   }
 
   img {
-    @apply w-[48px] min-w-[48px] cursor-pointer rounded-[16px] duration-100;
+    @apply w-[48px] min-w-[48px] cursor-pointer rounded-[16px] transition;
   }
 
   .opened {
@@ -89,7 +91,7 @@ body {
     @apply relative;
 
     &::before {
-      @apply pointer-events-none invisible absolute top-[-40px] left-1/2 w-max -translate-x-1/2 rounded-xl border-2 border-(--ui-text-muted) bg-(--ui-bg) px-2 py-1 whitespace-nowrap text-(--ui-text-muted) opacity-0 duration-300 content-[attr(data-tooltip)];
+      @apply pointer-events-none invisible absolute top-[-40px] left-1/2 w-max min-w-10 -translate-x-1/2 rounded-xl border-2 border-(--ui-text-muted) bg-(--ui-bg) px-2 py-1 text-center font-semibold whitespace-nowrap text-(--ui-text-muted) opacity-0 duration-300 content-[attr(data-tooltip)];
     }
 
     &:hover::before {
