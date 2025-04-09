@@ -1,14 +1,6 @@
-use std::io;
-use std::{ffi::OsStr, os::windows::ffi::OsStrExt, ptr};
+use std::{ffi::OsStr, io, os::windows::ffi::OsStrExt, ptr};
 
-#[derive(serde::Serialize)]
-pub struct PartitionInfo {
-    pub drive_letter: String,
-    pub label: String,
-    pub fs_type: String,
-    pub total_size: u64,
-    pub free_space: u64,
-}
+use super::models::partition::PartitionInfo;
 
 type DWORD = u32;
 type LPCWSTR = *const u16;

@@ -24,8 +24,11 @@ const handlePartitionSelect = async (partition: PartitionInfo) => {
   }
 
   try {
+    await invoke('update_working_drive', {
+      drive: partition.drive_letter,
+    });
     const currentTree: DirectoryNode = await invoke('get_children', {
-      path: `${partition.drive_letter ?? ''}\\`,
+      path: `${partition.drive_letter ?? ''}`,
     });
 
     partitionStore.setCurrentPartition(partition, currentTree);

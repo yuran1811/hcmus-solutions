@@ -1,73 +1,9 @@
-use chrono::{DateTime, Local};
-use std::{
-    cmp::Ordering,
-    fs,
-    os::windows::fs::MetadataExt,
-    path::{Path, PathBuf},
-    time::SystemTime,
+use std::{cmp::Ordering, fs, os::windows::fs::MetadataExt, path::Path};
+
+use crate::{
+    models::fs::{DirectoryNode, FileMetadata},
+    utils::base::{format_attributes, system_time_to_local_strings},
 };
-
-#[derive(serde::Serialize, Debug)]
-pub struct DirectoryNode {
-    pub name: String,
-    pub path: PathBuf,
-    pub is_file: bool,
-    pub children: Vec<DirectoryNode>,
-    pub metadata: FileMetadata,
-    pub has_children: bool,
-    pub loaded: bool,
-}
-
-#[derive(serde::Serialize, Debug)]
-pub struct FileMetadata {
-    pub name: String,
-    pub attributes: String,
-    pub created_date: String,
-    pub created_time: String,
-    pub size: u64,
-}
-
-fn format_attributes(attrs: u32) -> String {
-    let mut attributes = Vec::new();
-
-    if attrs & 0x1 != 0 {
-        attributes.push("Read-only");
-    }
-    if attrs & 0x2 != 0 {
-        attributes.push("Hidden");
-    }
-    if attrs & 0x4 != 0 {
-        attributes.push("System");
-    }
-    if attrs & 0x10 != 0 {
-        attributes.push("Directory");
-    }
-    if attrs & 0x20 != 0 {
-        attributes.push("Archive");
-    }
-    if attrs & 0x40 != 0 {
-        attributes.push("Device");
-    }
-    if attrs & 0x80 != 0 {
-        attributes.push("Normal");
-    }
-    if attrs & 0x100 != 0 {
-        attributes.push("Temporary");
-    }
-    if attrs & 0x400 != 0 {
-        attributes.push("Offline");
-    }
-
-    attributes.join(", ")
-}
-
-fn system_time_to_local_strings(time: SystemTime) -> (String, String) {
-    let datetime: DateTime<Local> = time.into();
-    (
-        datetime.format("%Y-%m-%d").to_string(),
-        datetime.format("%H:%M:%S").to_string(),
-    )
-}
 
 pub fn get_file_metadata(path: &str) -> Result<FileMetadata, String> {
     let path = Path::new(path);
@@ -180,7 +116,7 @@ fn has_any_child(path: &Path) -> bool {
 }
 
 fn should_include(path: &Path) -> bool {
-    // Bỏ qua các thư mục ẩn và hệ thống
+    // Ignore system or hidden files
     if let Ok(metadata) = fs::metadata(path) {
         let attrs = metadata.file_attributes();
         !(attrs & 0x2 != 0 || attrs & 0x4 != 0) // Hidden or System
