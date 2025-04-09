@@ -14,3 +14,14 @@
   - Display progress bar when downloading.
 
 - [**Source**](./lab1/)
+
+## Lab 2: FAT32 File System
+
+- **Description**: Reading and display FAT32 file system information from a disk image. The program reads the boot sector, file allocation table, and root directory entries to display information about the file system.
+
+- **Some key features**:
+
+  - Read and display the entries.
+  - Read and display the file content.
+
+- [**Source**](https://github.com/yuran1811/hcmus-solutions)
