@@ -21,7 +21,9 @@
 
 - **Some key features**:
 
-  - Read and display the entries.
+  - Automatically detect partitions type (auto-scan for FAT32 partitions).
+  - Render directory tree.
   - Read and display the file content.
 
-- [**Source**](https://github.com/yuran1811/hcmus-solutions)
+- [**New Source**](https://github.com/yuran1811/hcmus-os--fat32)
+- [**Old Source**](./lab2)
