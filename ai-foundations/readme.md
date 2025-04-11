@@ -26,6 +26,6 @@
 
 ## Linear Models
 
-- [**Github Repo**](https://github.com/yuran1811/hcmus-ai-foundations--ln)
+- [**Github Repo**](https://github.com/yuran1811/hcmus-ai-foundations--lm)
 
-- [**More details**](https://github.com/yuran1811/hcmus-ai-foundations--ln/blob/main/Source/README.md)
+- [**More details**](https://github.com/yuran1811/hcmus-ai-foundations--lm/blob/main/Source/README.md)
